@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float moveSpeed = 1f;
 	public float sprintingModifier = 2f;
 
-	public Animator anim;
+	//public Animator anim;
 
 	private CursorLockMode cursorMode;
 	private bool isSprinting = false;
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		var camForward = Camera.main.transform.forward;
 		
-		anim.SetBool("isWalking", movement.magnitude != 0f);
+		//anim.SetBool("isWalking", movement.magnitude != 0f);
 		//anim.SetFloat("Blend", movement.normalized.magnitude);
 		
 		this.gameObject.transform.Translate(movement);

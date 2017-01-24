@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
 
-	public ElevatorLogic elevator;
 	public int nbOfScenes = 1;
+
+	public bool readyToLoad;
 
 	private AsyncOperation currentOperation;
 	private int currentLevel;
+	
 
 	// Undestroyable singleton !
 	void Awake () {
@@ -24,39 +26,41 @@ public class GameManager : MonoBehaviour {
 			DontDestroyOnLoad(this.gameObject);
 			currentLevel = 0;
 		}
-
+		readyToLoad = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(currentOperation != null) {
 			if(currentOperation.isDone) {
-				currentOperation = null;
-				elevator.OpenDoors();
+				readyToLoad = true;
 			}
 		}
 	}
 
-	void OnTriggerEnter(Collider other) {
-		Debug.Log("collide");
-		if(other.gameObject.tag == "Player") {
-			Debug.Log("Loading next level");
-			LoadNextLevel();
-		}
+	public void LoadNextLevel(){
+		if(!readyToLoad) return;
+		readyToLoad = false;
+		// clean up level
+		var level = GameObject.Find("Level");
+		float delay = level.GetComponent<LevelManager>().CleanLevel();
+
+		//start actual load after clean up
+		Invoke("StartLoad", delay);
 	}
 
-	private void LoadNextLevel(){
+	private void StartLoad()
+	{
+		// increment level count to load
 		currentLevel = (currentLevel+1) % nbOfScenes;
 		LoadNewLevel(currentLevel);
 	}
 
 	private void LoadNewLevel(int index){
-		elevator.CloseDoors();
 		currentOperation = SceneManager.LoadSceneAsync(index);
 	}
 
 	private void LoadNewLevel(string name){
-		elevator.CloseDoors();
 		currentOperation = SceneManager.LoadSceneAsync(name);
 	}
 }

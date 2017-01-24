@@ -13,6 +13,7 @@ public class ElevatorLogic : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		if(other.gameObject.tag == "Player") {
 			CloseDoors();
+			GameManager.instance.readyToLoad = true;
 		}
 	}
 
