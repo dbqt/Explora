@@ -16,7 +16,9 @@ public class ComputerLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!inRange || !GameManager.instance.readyToLoad) {
+        inRange = true;
+
+        if (!inRange || !GameManager.instance.readyToLoad) {
 			DesactivateUI();
 		} else if (inRange && GameManager.instance.readyToLoad && ButtonUI.activeSelf && Input.GetButtonDown("Activate")) {
 			GameManager.instance.LoadNextLevel();
