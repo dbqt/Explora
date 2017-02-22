@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 		var rotationHead = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
 
 		
-		ApplyTransformations(move, rotationBody, rotationHead);	
+		//ApplyTransformations(move, rotationBody, rotationHead);	
 	}
 
 	private void ApplyTransformations(Vector3 movement, Vector3 rotationBody, Vector3 rotationHead) {

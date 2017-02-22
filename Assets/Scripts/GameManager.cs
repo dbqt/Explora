@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour {
 				readyToLoad = true;
 			}
 		}
+
+		if(Input.GetButtonDown("Jump")) {
+			LoadNextLevel();
+		}
 	}
 
 	public void LoadNextLevel(){

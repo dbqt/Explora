@@ -41,7 +41,7 @@ public class ComputerLogic : MonoBehaviour {
 	}
 
 	public void ActivateUI(){
-		ButtonUI.SetActive(true);
+		//ButtonUI.SetActive(true);
 	}
 
 	public void DesactivateUI(){
